@@ -29,7 +29,7 @@ Link for task: [Compilers](https://docs.google.com/document/d/1KL2h5e0mwsyTW5KI5
  
     - **Output**- ![Screenshot (36)](https://github.com/user-attachments/assets/ba3f9490-113a-42a4-9ed3-757365789ac2)
 
-    You can try taking a word more than 26 but less than 29.
+    You can try taking a word of length more than 26 but less than 29.
 
 - If we add a sequence of numbers, say 123
     - `"Hello, 123 world-wide communication technologies."`
