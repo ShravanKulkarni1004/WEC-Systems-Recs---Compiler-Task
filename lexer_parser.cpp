@@ -15,8 +15,9 @@
 #include <cctype>
 #include <string>
 #include <vector>
+#include <queue>        // For level-order traversal
+#include <memory>       // For smart pointers
 #include <unordered_map>
-#include <memory>  // For smart pointers
 
 // Token types enumeration
 /**
@@ -375,7 +376,7 @@ private:
     }
 
     // Checking for tokens after STOP
-    if (currentPos < tokens.size()) {
+    if (currentPos <= tokens.size()) {
         errors.push_back("Error: Extra tokens found after full stop.");
         return nullptr;
     }
@@ -474,14 +475,35 @@ private:
     }
 };
 
-// Helper function to print the AST structure
-void printAST(const std::shared_ptr<ASTNode>& node, int depth = 0) {
-    if (!node) return;
-    std::cout << std::string(depth * 2, ' ') << node->value << '\n';
-    for (const auto& child : node->children) {
-        printAST(child, depth + 1);
+
+// Helper function to print the AST structure in level-order format
+void printASTLevelOrder(const std::shared_ptr<ASTNode>& root) {
+    if (!root) return;
+
+    std::queue<std::shared_ptr<ASTNode>> nodeQueue;
+    nodeQueue.push(root);
+
+    while (!nodeQueue.empty()) {
+        size_t levelSize = nodeQueue.size();  // Number of nodes at current level
+
+        // Process all nodes at the current level
+        for (size_t i = 0; i < levelSize; ++i) {
+            std::shared_ptr<ASTNode> currentNode = nodeQueue.front();
+            nodeQueue.pop();
+
+            // Print the value of the current node
+            std::cout << currentNode->value << " ";
+
+            // Enqueue all children of the current node
+            for (const auto& child : currentNode->children) {
+                nodeQueue.push(child);
+            }
+        }
+
+        std::cout << std::endl;  // Print a newline after each level
     }
 }
+
 
 
 // Helper function to convert TokenType enum to a string
@@ -501,11 +523,8 @@ std::string tokenTypeToString(TokenType type) {
 
 
 
-// #include "C:\Users\User\Downloads\sample_compiler_frontend\sample_lexer\sample_lexer.hpp"
-
-
 int main() {
-    std::string input = "Hello, 'modern' world-wide communication technologies.";
+    std::string input = "Hello, world-wide communication technologies";
 
     Lexer lexer(input);
     std::vector<Token> tokens;
@@ -534,7 +553,6 @@ int main() {
         }
     }
 
-    // lexer.printSymbolTable();  // Optional: Print symbol table
 
     // Parsing phase
     Parser parser(tokens);
@@ -549,61 +567,8 @@ int main() {
         std::cout << "\nAccepted String: ";
         parser.printAcceptedString();
         std::cout << "\nAST Structure: \n";
-        printAST(ast);  // Print the AST
+        printASTLevelOrder(ast);            // Print the AST
     }
 
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// #include <string>
-
-// #include "sample_lexer.hpp"
-
-// static std::string input;
-
-// int set_input(std::string s)
-// {
-// 	input = s;
-// 	return 0;
-// }
-
-// int get_token()
-// {
-// 	static int pos = 0;
-// 	std::string token_data = "";
-
-// 	while(/*condition to continue matching*/)
-// 	{
-// 		pos++;
-// 		// match a token
-// 		// if match succeeds, return token type
-// 	}
-
-// 	//other logic
-
-// 	//match failed, return -1
-// 	return -1;
-// }
