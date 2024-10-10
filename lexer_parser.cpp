@@ -484,13 +484,28 @@ void printAST(const std::shared_ptr<ASTNode>& node, int depth = 0) {
 }
 
 
+// Helper function to convert TokenType enum to a string
+std::string tokenTypeToString(TokenType type) {
+    switch (type) {
+        case STARTWORD: return "STARTWORD";
+        case WORD: return "WORD";
+        case COMMA: return "COMMA";
+        case HYPHEN: return "HYPHEN";
+        case STOP: return "STOP";
+        case QUOTATION: return "QUOTATION";
+        case INVALID: return "INVALID";
+        case END: return "END";
+        default: return "UNKNOWN";
+    }
+}
+
 
 
 // #include "C:\Users\User\Downloads\sample_compiler_frontend\sample_lexer\sample_lexer.hpp"
 
 
 int main() {
-    std::string input = "Hello, world-wide communication technologies.";
+    std::string input = "Hello, 'modern' world-wide communication technologies.";
 
     Lexer lexer(input);
     std::vector<Token> tokens;
@@ -505,9 +520,10 @@ int main() {
         }
     }
 
-    std::cout << "Tokens: \n";
+    std::cout << "Symbol Table: \n";
     for (const auto& tok : tokens) {
-        std::cout << "Token Type: " << tok.type << " ,Token Value: " << tok.value << '\n';
+        // Use the helper function to convert token type to string
+        std::cout << "Token Type: " << tokenTypeToString(tok.type) << " ,Token Value: " << tok.value << '\n';
     }
 
     // Print errors from lexical phase
@@ -518,7 +534,7 @@ int main() {
         }
     }
 
-    lexer.printSymbolTable();  // Optional: Print symbol table
+    // lexer.printSymbolTable();  // Optional: Print symbol table
 
     // Parsing phase
     Parser parser(tokens);
