@@ -6,6 +6,9 @@ Welcome to my repository where i have explained the tasks that i worked on durin
 
 Link for task: [Compilers](https://docs.google.com/document/d/1KL2h5e0mwsyTW5KI5TlLmu3iGvPcs19UP5JArc60CXE/edit?usp=sharing)
 
+### About my code:
+Designing a simple English-like language compiler with specifications provided in task for lexical and syntactic analysis. I have taken handwritten approach for writing the code for compiler. I have introduced a lot of functions and methods for classes, and also explained them in a detailed way. The outputs are Symbol Table, representing token type of respective token, Validity of Input String, Lexical and Parsing Errors(if any) and Abstract Syntax Tree of accepted string.
+
 ### How to access my code 
 - Open lexer_parser.cpp file
 - Copy the whole code
