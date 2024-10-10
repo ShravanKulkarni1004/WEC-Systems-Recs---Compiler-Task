@@ -15,7 +15,7 @@ Link for task: [Compilers](https://docs.google.com/document/d/1KL2h5e0mwsyTW5KI5
 - Assuming you have gone through the code, lets start with simplest input string
   - `"Hello, world-wide communication technologies."`
   
-  - **Output**- ![Screenshot (27)](https://github.com/user-attachments/assets/81b59073-c7d6-4591-aa9c-2fd9b2089b8c)
+  - **Output**- ![Screenshot (32)](https://github.com/user-attachments/assets/d12ab10a-21ee-4354-9908-9e456c550ab1)
 
   The code tokenizes the given input string based on specifications provided. It also parses through every token and analyzes it syntactically and gives the accepted string along with      the Abstract Syntax Tree(AST).
   
