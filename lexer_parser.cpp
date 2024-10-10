@@ -541,9 +541,11 @@ int main() {
     auto ast = parser.parse();
 
     if (parser.hasErrors()) {
+        std::cout<< "\nThe string is invalid. \n";
         std::cout << "\nParsing Errors: \n";
         parser.printErrors();
     } else {
+        std::cout<< "\nThe string is valid. \n";
         std::cout << "\nAccepted String: ";
         parser.printAcceptedString();
         std::cout << "\nAST Structure: \n";
