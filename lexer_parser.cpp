@@ -386,7 +386,7 @@ private:
     }
 
     // Check if any tokens remain after the STOP token
-    if (currentPos <= tokens.size() && (tokens[currentPos-1].type == WORD || tokens[currentPos-1].type == COMMA || tokens[currentPos-1].type == HYPHEN || tokens[currentPos-1].type == QUOTATION || tokens[currentPos-1].type == STARTWORD || tokens[currentPos-1].type == STOP || tokens[currentPos-1].type == INVALID)){
+    if (currentPos <= tokens.size() && (tokens[currentPos-1].type == WORD || tokens[currentPos-1].type == COMMA || tokens[currentPos-1].type == HYPHEN || tokens[currentPos-1].type == QUOTATION || tokens[currentPos-1].type == STARTWORD || tokens[currentPos-1].type == INVALID)){
         // std::cout << "Extra tokens detected after STOP: " << currentToken().value << "\n";  // Debugging info
         errors.push_back("Error: Extra tokens found after full stop.");
         return nullptr;
@@ -542,7 +542,7 @@ std::string tokenTypeToString(TokenType type) {
 
 
 int main() {
-    std::string input = "Hello, world-wide communication technologies..";
+    std::string input = "Hello, world-wide communication technologies.";
 
     Lexer lexer(input);
     std::vector<Token> tokens;
