@@ -78,5 +78,14 @@ Designing a simple English-like language compiler with specifications provided i
     - `"Hello, world-wide communication technologies.abc"`
  
     - **Output**- ![Screenshot (44)](https://github.com/user-attachments/assets/b9feea98-f5ee-4547-bd6c-52559da41c1a)
+  
 
 
+*Similarlly, You can play with the compiler with different kinds of input strings and try finding out how the compiler analyzes the input string.*
+
+
+
+### Conclusion
+Please feel free to add on any suggestions or improvements to the compiler.
+
+Thank you!😄
