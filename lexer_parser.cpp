@@ -19,6 +19,11 @@
 #include <memory>       // For smart pointers
 #include <unordered_map>
 
+
+std::vector<std::string> lexicalErrors;     ///< List of lexical errors (Defining it globally because it has multiple uses)
+
+
+
 // Token types enumeration
 /**
  * @enum TokenType
@@ -179,7 +184,9 @@ private:
     std::string input;                     ///< Input string to be tokenized
     size_t pos;                            ///< Current position in the input string
     std::vector<std::string> symbolTable;  ///< Symbol table to store valid words
+
 };
+
 
 
 
@@ -362,27 +369,38 @@ private:
         }
     }
 
-    // Checking for fullstop at end of string 
+    // Check if we encountered the STOP token
     if (currentPos < tokens.size() && currentToken().type == STOP) {
         std::shared_ptr<ASTNode> stopNode = parseStop();
         if (stopNode) {
             sentenceNode->addChild(stopNode);
             acceptedTokens.push_back(tokens[currentPos - 1]);
             advanceToken();  // Move past the STOP token
+
+            // DEBUG: Confirm advancing after STOP
+            // std::cout << "Reached STOP token. Advancing token pointer.\n";
         }
     } else {
         errors.push_back("Expected STOP at the end");
         return nullptr;
     }
 
-    // Checking for tokens after STOP
-    if (currentPos <= tokens.size()) {
+    // Check if any tokens remain after the STOP token
+    if (currentPos <= tokens.size() && (tokens[currentPos-1].type == WORD || tokens[currentPos-1].type == COMMA || tokens[currentPos-1].type == HYPHEN || tokens[currentPos-1].type == QUOTATION || tokens[currentPos-1].type == STARTWORD || tokens[currentPos-1].type == STOP || tokens[currentPos-1].type == INVALID)){
+        // std::cout << "Extra tokens detected after STOP: " << currentToken().value << "\n";  // Debugging info
         errors.push_back("Error: Extra tokens found after full stop.");
+        return nullptr;
+    }
+
+    // Check for lexical errors
+    if (!lexicalErrors.empty()) {
+        errors.push_back("Error: Lexical errors found. Invalid tokens in the sentence.");
         return nullptr;
     }
 
     return sentenceNode;
 }
+
 
     /**
      * @brief Parses a Startword token.
@@ -524,16 +542,16 @@ std::string tokenTypeToString(TokenType type) {
 
 
 int main() {
-    std::string input = "Hello, world-wide communication technologies";
+    std::string input = "Hello, world-wide communication technologies..";
 
     Lexer lexer(input);
     std::vector<Token> tokens;
-    std::vector<std::string> errors;
 
     Token token;
     while ((token = lexer.nextToken()).type != END) {
         if (token.type == INVALID) {
-            errors.push_back("Invalid token: " + token.value);
+            lexicalErrors.push_back("Invalid token: " + token.value);
+
         } else {
             tokens.push_back(token);
         }
@@ -546,9 +564,9 @@ int main() {
     }
 
     // Print errors from lexical phase
-    if (!errors.empty()) {
+    if (!lexicalErrors.empty()) {
         std::cout << "\nLexical Errors: \n";
-        for (const auto& err : errors) {
+        for (const auto& err : lexicalErrors) {
             std::cout << err << '\n';
         }
     }
