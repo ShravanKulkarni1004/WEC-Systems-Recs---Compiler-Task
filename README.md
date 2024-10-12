@@ -13,6 +13,7 @@ Designing a simple English-like language compiler with specifications provided i
 - Open lexer_parser.cpp file
 - Copy the whole code
 - Paste it in a C++ compiler(eg. VScode)
+- Try various input possibilites in the input string given in main function at last in the code.
 
 ### Running Tests
 - Assuming you have gone through the code, lets start with simplest input string
