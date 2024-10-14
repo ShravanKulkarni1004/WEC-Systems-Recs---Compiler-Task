@@ -26,7 +26,8 @@ Designing a simple English-like language compiler with specifications provided i
 - If we add a word of length less than 3
     - `"Hello, my world-wide communication technologies."`
  
-    - **Output**- ![Screenshot (35)](https://github.com/user-attachments/assets/d03a1e66-2a8b-4a94-ac21-cea3fbdfc6a7)
+    - **Output**- ![Screenshot (45)](https://github.com/user-attachments/assets/4e100c19-99b7-492d-a439-b12356d10721)
+
 
 - If we add a word of length more than 26
     - `"Hello, world-wide communication technologies abcdefghijklmnopqrstuvwxyzabc."`
@@ -38,7 +39,8 @@ Designing a simple English-like language compiler with specifications provided i
 - If we add a sequence of numbers, say 123
     - `"Hello, 123 world-wide communication technologies."`
  
-    - **Output**- ![Screenshot (37)](https://github.com/user-attachments/assets/07036101-27ff-47ac-b606-ab6582478460)
+    - **Output**- ![Screenshot (46)](https://github.com/user-attachments/assets/1d6ff591-4f25-419e-9e1c-fea0686d6390)
+
 
 - If we add a quotation
     - `"Hello, 'modern' world-wide communication technologies."`
